@@ -13,7 +13,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { getUxpGlobalLocation, getYarnGlobalBinFolder } = require("./common");
+const { getUxpGlobalLocation, getNodeGlobalBinFolder } = require("./common");
 /**
  * NOTE: This scripts gets called post install. We will use this create a sym link to
  * main script file (uxp.js) in the npm global bin folder.
@@ -23,11 +23,11 @@ const { getUxpGlobalLocation, getYarnGlobalBinFolder } = require("./common");
  * This setup will be run as post-install step.
  */
 
-function checkYarnBinFolderInPath() {
-    const yarnBinPath = getYarnGlobalBinFolder();
-    if (!process.env.PATH.includes(yarnBinPath)) {
-        console.error("Yarn global bin folder is not exported in PATH environment variable. `uxp` command might be not be directly available from the terminal.");
-        console.log("Please add the yarn global bin folder to PATH environment variable to access `uxp` command directly from terminal.");
+function checkNodeBinFolderInPath() {
+    const nodeBinPath = getNodeGlobalBinFolder();
+    if (!process.env.PATH.includes(nodeBinPath)) {
+        console.error("Node global bin folder is not exported in PATH environment variable. `uxp` command might not be directly available from the terminal.");
+        console.log("Please add the Node global bin folder to PATH environment variable to access `uxp` command directly from terminal.");
     }
 }
 
@@ -52,7 +52,7 @@ function installUxpCliScriptForMac() {
     }
     fs.symlinkSync(mainScriptFile, uxpBinPath, "file");
 
-    checkYarnBinFolderInPath();
+    checkNodeBinFolderInPath();
 }
 
 function installUxpCliScriptForWin() {
@@ -72,7 +72,7 @@ function installUxpCliScriptForWin() {
     const filePath = `${uxpBinPath}.cmd`;
     fs.writeFileSync(filePath, fileContent, "utf8");
 
-    checkYarnBinFolderInPath();
+    checkNodeBinFolderInPath();
 }
 
 const isWindows = process.platform === "win32";

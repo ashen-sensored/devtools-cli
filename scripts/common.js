@@ -14,18 +14,24 @@
 const path = require("path");
 const { execSync } = require("child_process");
 
-function getYarnGlobalBinFolder() {
-    const binPath = execSync("yarn global bin");
-    return binPath.toString().trim();
+function getNodeGlobalBinFolder() {
+    try {
+        const binPath = execSync("which node");
+        const binPathString = binPath.toString().trim();
+        return path.dirname(binPathString); // Return the directory containing the node executable
+    } catch (error) {
+        console.error("Error getting npm global bin folder:", error.message);
+        return null;
+    }
 }
 
 function getUxpGlobalLocation() {
     const mainScriptFile = path.resolve(__dirname, "../packages/uxp-devtools-cli/src/uxp.js");
-    const yarnBinPath = getYarnGlobalBinFolder();
-    if (!yarnBinPath) {
-        throw new Error("Failed to install the cli scripts in yarn bin folder");
+    const nodeBinPath = getNodeGlobalBinFolder();
+    if (!nodeBinPath) {
+        throw new Error("Failed to determine the Node.js global bin folder");
     }
-    const uxpBinPath = path.resolve(yarnBinPath, "uxp");
+    const uxpBinPath = path.resolve(nodeBinPath, "uxp");
     return {
         mainScriptFile,
         uxpBinPath,
@@ -34,5 +40,5 @@ function getUxpGlobalLocation() {
 
 module.exports = {
     getUxpGlobalLocation,
-    getYarnGlobalBinFolder,
+    getNodeGlobalBinFolder,
 };

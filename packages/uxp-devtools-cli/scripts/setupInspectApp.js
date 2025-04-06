@@ -16,7 +16,7 @@ function generateDevtoolsAppPacakge() {
     let uxpDevtoolAppDir =  require.resolve("@adobe/uxp-inspect-frontend/package.json");
     uxpDevtoolAppDir = path.dirname(uxpDevtoolAppDir);
 
-    execSync("yarn package", {
+    execSync("pnpm package", {
         cwd: uxpDevtoolAppDir,
         stdio: [ "inherit", "inherit", "inherit" ]
     });

@@ -1,0 +1,11 @@
+onlyBuiltDependencies:
+  - core-js
+  - core-js-pure
+  - electron
+  - electron-winstaller
+  - fsevents
+  - puppeteer
+  - robotjs
+packages:
+  - packages/*
+  - packages/uxp-templates-pack/*

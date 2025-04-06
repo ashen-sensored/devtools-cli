@@ -12,7 +12,7 @@
  */
 
 const { loadPluginSessionFromUxpRc }  = require("../../utils/Common");
-const { lauchDevtoolsInspectApp } = require("../../utils/CLICDTInspectMgr");
+const { lauchDevtoolsInspectApp, lauchDevtoolsInspectAppDebug } = require("../../utils/CLICDTInspectMgr");
 
 const debugOptions = {
     apps: {

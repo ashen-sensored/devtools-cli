@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+'./packages/uxp-inspect-frontend/dist/mac-arm64/Adobe UXP Developer Tool.app/Contents/MacOS/Adobe UXP Developer Tool' --inspect-brk=8315 --cdtDebugWsUrl=ws=127.0.0.1:14001/socket/cdt/8688578d-6800-4aba-8815-01746bf6c2a8 --details='{"app":{"id":"PS","version":"26.6.0","name":"Adobe Photoshop","uxpVersion":"uxp-8.1.2-0-091bd7d"},"plugin":{"id":"sd-ppp","name":"SD-PPP"},"consoleOnly":false}'
